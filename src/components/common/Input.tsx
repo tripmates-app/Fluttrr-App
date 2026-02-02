@@ -91,7 +91,7 @@ const styles = StyleSheet.create({
     fontSize: fontSizes.sm,
     color: colors.text,
     marginBottom: spacing.xs,
-    fontWeight: '500',
+    fontWeight: 500,
   },
   inputContainer: {
     flexDirection: 'row',

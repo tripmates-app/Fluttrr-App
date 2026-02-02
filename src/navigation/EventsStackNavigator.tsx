@@ -19,7 +19,7 @@ export const EventsStackNavigator: React.FC = () => {
         },
         headerTintColor: colors.text,
         headerTitleStyle: {
-          fontWeight: '600',
+          fontWeight: 600,
         },
         headerShadowVisible: false,
       }}

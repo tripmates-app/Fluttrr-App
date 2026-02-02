@@ -66,7 +66,7 @@ export const BusinessTabNavigator: React.FC = () => {
         },
         tabBarLabelStyle: {
           fontSize: 11,
-          fontWeight: '500',
+          fontWeight: 500,
         },
         tabBarIcon: ({ focused, color }) => {
           let iconName: keyof typeof Ionicons.glyphMap;
