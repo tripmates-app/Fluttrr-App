@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { View, Text, StyleSheet, ScrollView, Image, Dimensions, TouchableOpacity } from 'react-native';
+import React, { useEffect, useState, useCallback } from 'react';
+import { View, Text, StyleSheet, ScrollView, Image, Dimensions } from 'react-native';
 import { RouteProp } from '@react-navigation/native';
 import { Ionicons } from '@expo/vector-icons';
 import { Business, Event } from '../../types';
@@ -7,14 +7,18 @@ import { Loading, Button, Chip } from '../../components/common';
 import { EventCard } from '../../components/events/EventCard';
 import { colors } from '../../constants/colors';
 import { fontSizes, fontWeights } from '../../constants/typography';
-import { spacing, borderRadius, shadows } from '../../constants/spacing';
+import { spacing } from '../../constants/spacing';
 import { getBusinessById } from '../../services/businessService';
 import { getEvents } from '../../services/eventService';
 
 const { width } = Dimensions.get('window');
 
+type BusinessProfileParams = {
+  businessId: string;
+};
+
 type Props = {
-  route: RouteProp<any, 'BusinessProfile'>;
+  route: RouteProp<{ BusinessProfile: BusinessProfileParams }, 'BusinessProfile'>;
   navigation: any;
 };
 
@@ -24,11 +28,7 @@ const BusinessProfileScreen: React.FC<Props> = ({ route, navigation }) => {
   const [events, setEvents] = useState<Event[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
-  useEffect(() => {
-    fetchBusinessData();
-  }, [businessId]);
-
-  const fetchBusinessData = async () => {
+  const fetchBusinessData = useCallback(async () => {
     try {
       const [fetchedBusiness, { events: fetchedEvents }] = await Promise.all([
         getBusinessById(businessId),
@@ -41,7 +41,11 @@ const BusinessProfileScreen: React.FC<Props> = ({ route, navigation }) => {
     } finally {
       setIsLoading(false);
     }
-  };
+  }, [businessId]);
+
+  useEffect(() => {
+    fetchBusinessData();
+  }, [fetchBusinessData]);
 
   if (isLoading) return <Loading fullScreen />;
   if (!business) return <View style={styles.container}><Text>Business not found</Text></View>;

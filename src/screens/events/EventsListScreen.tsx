@@ -1,7 +1,6 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import {
   View,
-  Text,
   StyleSheet,
   FlatList,
   RefreshControl,
@@ -16,7 +15,7 @@ import { RootState } from '../../store';
 import { EventCard } from '../../components/events/EventCard';
 import { Loading, EmptyState } from '../../components/common';
 import { colors } from '../../constants/colors';
-import { fontSizes, fontWeights } from '../../constants/typography';
+import { fontSizes } from '../../constants/typography';
 import { spacing, borderRadius } from '../../constants/spacing';
 import { getEvents, searchEvents, joinEvent, leaveEvent } from '../../services/eventService';
 import {

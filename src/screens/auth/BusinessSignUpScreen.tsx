@@ -359,7 +359,7 @@ const BusinessSignUpScreen: React.FC<BusinessSignUpScreenProps> = ({ navigation 
       <View style={styles.verificationNote}>
         <Ionicons name="information-circle-outline" size={24} color={colors.primary} />
         <Text style={styles.verificationText}>
-          Your business will be verified within 24-48 hours. You'll be notified once approved.
+          Your business will be verified within 24-48 hours. You&apos;ll be notified once approved.
         </Text>
       </View>
     </>

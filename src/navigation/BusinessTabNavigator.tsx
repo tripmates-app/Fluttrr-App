@@ -13,9 +13,20 @@ import EventAnalyticsScreen from '../screens/business/EventAnalyticsScreen';
 import BusinessReviewsScreen from '../screens/business/BusinessReviewsScreen';
 import BusinessSettingsScreen from '../screens/business/BusinessSettingsScreen';
 
+type DashboardStackParamList = {
+  Dashboard: undefined;
+  EventAnalytics: { eventId: string };
+};
+
+type EventsStackParamList = {
+  BusinessEvents: undefined;
+  CreateEvent: undefined;
+  EventAnalytics: { eventId: string };
+};
+
 const Tab = createBottomTabNavigator<BusinessTabParamList>();
-const DashboardStack = createNativeStackNavigator();
-const EventsStack = createNativeStackNavigator();
+const DashboardStack = createNativeStackNavigator<DashboardStackParamList>();
+const EventsStack = createNativeStackNavigator<EventsStackParamList>();
 
 const DashboardStackNavigator = () => (
   <DashboardStack.Navigator screenOptions={{ headerShown: false }}>

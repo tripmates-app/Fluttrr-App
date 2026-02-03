@@ -14,7 +14,7 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RouteProp } from '@react-navigation/native';
 import { useSelector, useDispatch } from 'react-redux';
 import { Ionicons } from '@expo/vector-icons';
-import { EventsStackParamList, Event, User } from '../../types';
+import { EventsStackParamList, User } from '../../types';
 import { RootState } from '../../store';
 import { Button, Avatar, Loading, Chip } from '../../components/common';
 import { colors } from '../../constants/colors';
@@ -301,7 +301,7 @@ const EventDetailScreen: React.FC<EventDetailScreenProps> = ({
           {/* Who's Going */}
           <View style={styles.section}>
             <View style={styles.sectionHeader}>
-              <Text style={styles.sectionTitle}>Who's Going</Text>
+              <Text style={styles.sectionTitle}>Who&apos;s Going</Text>
               <Text style={styles.attendeeCount}>
                 {currentEvent.currentAttendees} people
               </Text>

@@ -15,7 +15,7 @@ import { ProfileStackParamList } from '../../types';
 import { RootState } from '../../store';
 import { colors } from '../../constants/colors';
 import { fontSizes, fontWeights } from '../../constants/typography';
-import { spacing, borderRadius } from '../../constants/spacing';
+import { spacing } from '../../constants/spacing';
 import { updateUserProfile } from '../../services/userService';
 import { updateUser } from '../../store/slices/authSlice';
 
@@ -85,7 +85,11 @@ const SettingsScreen: React.FC<SettingsScreenProps> = ({ navigation }) => {
       {hasToggle ? (
         <Switch
           value={toggleValue}
-          onValueChange={(value) => toggleKey && handleToggle(toggleKey, value)}
+          onValueChange={(value) => {
+            if (toggleKey) {
+              handleToggle(toggleKey, value);
+            }
+          }}
           trackColor={{ false: colors.border, true: colors.primaryLight }}
           thumbColor={toggleValue ? colors.primary : colors.textLight}
         />

@@ -104,8 +104,8 @@ export const getEvent = async (eventId: string): Promise<Event | null> => {
 export const getEvents = async (
   filters?: {
     category?: string;
-    startDate?: Date;
-    endDate?: Date;
+    startDate?: Date | string;
+    endDate?: Date | string;
     price?: string;
     ageRestriction?: string;
     businessId?: string;
@@ -152,16 +152,18 @@ export const getEvents = async (
     }
 
     if (filters?.startDate) {
+      const filterStartDate = typeof filters.startDate === 'string' ? new Date(filters.startDate) : filters.startDate;
       events = events.filter((e) => {
         const eventStart = e.startTime instanceof Timestamp ? e.startTime.toDate() : e.startTime;
-        return eventStart >= filters.startDate!;
+        return eventStart >= filterStartDate;
       });
     }
 
     if (filters?.endDate) {
+      const filterEndDate = typeof filters.endDate === 'string' ? new Date(filters.endDate) : filters.endDate;
       events = events.filter((e) => {
         const eventStart = e.startTime instanceof Timestamp ? e.startTime.toDate() : e.startTime;
-        return eventStart <= filters.endDate!;
+        return eventStart <= filterEndDate;
       });
     }
 

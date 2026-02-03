@@ -1,25 +1,25 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { View, Text, StyleSheet, ScrollView } from 'react-native';
 import { RouteProp } from '@react-navigation/native';
 import { Ionicons } from '@expo/vector-icons';
-import { Loading, Card } from '../../components/common';
+import { Loading } from '../../components/common';
 import { colors } from '../../constants/colors';
 import { fontSizes, fontWeights } from '../../constants/typography';
 import { spacing, borderRadius, shadows } from '../../constants/spacing';
 import { getEventAnalytics } from '../../services/businessService';
 
-type Props = { route: RouteProp<any, 'EventAnalytics'> };
+type EventAnalyticsParams = {
+  eventId: string;
+};
+
+type Props = { route: RouteProp<{ EventAnalytics: EventAnalyticsParams }, 'EventAnalytics'> };
 
 const EventAnalyticsScreen: React.FC<Props> = ({ route }) => {
   const { eventId } = route.params;
   const [analytics, setAnalytics] = useState<any>(null);
   const [isLoading, setIsLoading] = useState(true);
 
-  useEffect(() => {
-    fetchAnalytics();
-  }, [eventId]);
-
-  const fetchAnalytics = async () => {
+  const fetchAnalytics = useCallback(async () => {
     try {
       const data = await getEventAnalytics(eventId);
       setAnalytics(data);
@@ -28,7 +28,11 @@ const EventAnalyticsScreen: React.FC<Props> = ({ route }) => {
     } finally {
       setIsLoading(false);
     }
-  };
+  }, [eventId]);
+
+  useEffect(() => {
+    fetchAnalytics();
+  }, [fetchAnalytics]);
 
   if (isLoading) return <Loading fullScreen />;
 
